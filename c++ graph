@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n = 5; // Количество вершин
+    vector<vector<int>> adjMatrix(n, vector<int>(n, 0));
+
+    // Добавление ребер
+    adjMatrix[0][1] = 1; // Ребро из 0 в 1
+    adjMatrix[1][2] = 1; // Ребро из 1 в 2
+
+    // Вывод матрицы
+    for (const auto& row : adjMatrix) {
+        for (int val : row) {
+            cout << val << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n = 5; // Количество вершин
+    vector<vector<int>> adjList(n);
+
+    // Добавление ребер
+    adjList[0].push_back(1); // Ребро из 0 в 1
+    adjList[1].push_back(2); // Ребро из 1 в 2
+
+    // Вывод списка смежности
+    for (int i = 0; i < n; i++) {
+        cout << i << ": ";
+        for (int neighbor : adjList[i]) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
