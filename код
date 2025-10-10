@@ -1,0 +1,17 @@
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
+public class Main {
+    public static void main(String[] args) {
+        SimpleGraph<String, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
+
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+
+        graph.addEdge("A", "B");
+        graph.addEdge("B", "C");
+
+        System.out.println(graph);
+    }
+}
