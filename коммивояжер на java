@@ -1,0 +1,72 @@
+java
+import java.util.*;
+
+public class TSP {
+    private int[][] graph;
+    private int n;
+
+    public TSP(int[][] matrix) {
+        this.graph = matrix;
+        this.n = matrix.length;
+    }
+
+    public int solve() {
+        List<Integer> vertices = new ArrayList<>();
+        for (int i = 1; i < n; i++) {
+            vertices.add(i);
+        }
+
+        int minPath = Integer.MAX_VALUE;
+
+        do {
+            int currentPath = 0;
+            int k = 0;
+
+            for (int i = 0; i < vertices.size(); i++) {
+                currentPath += graph[k][vertices.get(i)];
+                k = vertices.get(i);
+            }
+            currentPath += graph[k][0];
+
+            minPath = Math.min(minPath, currentPath);
+
+        } while (nextPermutation(vertices));
+
+        return minPath;
+    }
+
+    private boolean nextPermutation(List<Integer> array) {
+        int i = array.size() - 2;
+        while (i >= 0 && array.get(i) >= array.get(i + 1)) {
+            i--;
+        }
+        if (i < 0) {
+            return false;
+        }
+
+        int j = array.size() - 1;
+        while (array.get(j) <= array.get(i)) {
+            j--;
+        }
+
+        Collections.swap(array, i, j);
+        Collections.reverse(array.subList(i + 1, array.size()));
+        return true;
+    }
+
+    public void printSolution() {
+        System.out.println("Минимальная длина пути: " + solve());
+    }
+
+    public static void main(String[] args) {
+        int[][] graph = {
+            {0, 10, 15, 20},
+            {10, 0, 35, 25},
+            {15, 35, 0, 30},
+            {20, 25, 30, 0}
+        };
+
+        TSP tsp = new TSP(graph);
+        tsp.printSolution();
+    }
+}
