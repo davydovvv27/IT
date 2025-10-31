@@ -1,0 +1,62 @@
+c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+
+using namespace std;
+
+class TSP {
+private:
+    vector<vector<int>> graph;
+    int n;
+
+public:
+    TSP(vector<vector<int>> matrix) {
+        graph = matrix;
+        n = matrix.size();
+    }
+
+    int solve() {
+        vector<int> vertices;
+        for (int i = 1; i < n; i++) {
+            vertices.push_back(i);
+        }
+
+        int minPath = INT_MAX;
+
+        do {
+            int currentPath = 0;
+            int k = 0;
+
+            for (int i = 0; i < vertices.size(); i++) {
+                currentPath += graph[k][vertices[i]];
+                k = vertices[i];
+            }
+            currentPath += graph[k][0];
+
+            minPath = min(minPath, currentPath);
+
+        } while (next_permutation(vertices.begin(), vertices.end()));
+
+        return minPath;
+    }
+
+    void printSolution() {
+        cout << "Минимальная длина пути: " << solve() << endl;
+    }
+};
+
+int main() {
+    vector<vector<int>> graph = {
+        {0, 10, 15, 20},
+        {10, 0, 35, 25},
+        {15, 35, 0, 30},
+        {20, 25, 30, 0}
+    };
+
+    TSP tsp(graph);
+    tsp.printSolution();
+
+    return 0;
+}
